@@ -28,7 +28,7 @@ function Save-Output {
         Overload function for Write-Output
 
     .PARAMETER FileObject
-        File objects to be exproted to csv
+        File objects to be exported to csv
 
     .PARAMETER SaveFileOutput
         Flag for exporting the file object
@@ -40,7 +40,7 @@ function Save-Output {
         Inbound object to be printed and saved to log
 
     .PARAMETER UserList
-        Online user list to be exproted to csv
+        Online user list to be exported to csv
 
     .EXAMPLE
         None
@@ -72,7 +72,7 @@ function Save-Output {
         try {
             if ($SaveOnlineUsageReports.IsPresent -and $UserList) {
                 Write-Output $StringObject
-                [PSCustomObject]$UserList | Export-Csv -Path (Join-Path -Path $LoggingDirectory -ChildPath $OnlineUseageReportsFileName) -NoTypeInformation -ErrorAction Stop
+                [PSCustomObject]$UserList | Export-Csv -Path (Join-Path -Path $LoggingDirectory -ChildPath $OnlineUsageReportsFileName) -NoTypeInformation -ErrorAction Stop
                 return
             }
 
@@ -113,8 +113,8 @@ function Get-OneDriveSyncStatus {
     .PARAMETER ExportSyncFileName
         Exported file that will contain the local OneDrive sync status
 
-    .PARAMETER ExportUseageReportsFileName
-        Exported file that will contain the oneline OneDrive sync status reports
+    .PARAMETER OnlineUsageReportsFileName
+        Exported file that will contain the online OneDrive sync status reports
 
     .PARAMETER GetOnlineUsageReports
         Connect to the Azure tenant and SharePoint site to retrieve all online OneDrive information
@@ -129,7 +129,7 @@ function Get-OneDriveSyncStatus {
         Open a browser window and navigate to the https://config.office.com portal
 
     .PARAMETER SaveOnlineUsageReports
-        Save online useage reports to file
+        Save online usage reports to file
 
     .PARAMETER SaveConsoleOutput
         Switch to indicate saving console output to file
@@ -208,7 +208,7 @@ function Get-OneDriveSyncStatus {
 
         [Parameter(ParameterSetName = 'OnelineReports')]
         [string]
-        $OnlineUseageReportsFileName = "OneDriveOnlineUseageReports.csv",
+        $OnlineUsageReportsFileName = "OneDriveOnlineUseageReports.csv",
 
         [Parameter(ParameterSetName = 'OnelineReports')]
         [switch]
@@ -332,7 +332,7 @@ function Get-OneDriveSyncStatus {
 
                     if ($parameters.ContainsKey('SaveOnlineUsageReports')) {
                         Save-Output "$(Get-TimeStamp) Exporting Online OneDrive usage reports" -UserList $userList -SaveOnlineUsageReports
-                        Save-Output "$(Get-TimeStamp) Exporting completed! File exported to: $(Join-Path -Path $LoggingDirectory -ChildPath $OnlineUseageReportsFileName)"
+                        Save-Output "$(Get-TimeStamp) Exporting completed! File exported to: $(Join-Path -Path $LoggingDirectory -ChildPath $OnlineUsageReportsFileName)"
                     }
                     else {
                         $userList | Format-Table
