@@ -4,7 +4,7 @@ function Get-TimeStamp {
             Get a time stamp
 
         .DESCRIPTION
-            Get a time date and time to create a customer time stamp
+            Get a time date and time to create a custom time stamp
 
         .EXAMPLE
             None
